@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/movie/movie"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#2B2B2B",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "奶图还是大白糖",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#dddddd",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#2B2B2B",
+    "list": [{
+      "pagePath": "pages/movie/movie",
+      "text": "影院热映",
+      "iconPath": "assets/img/dy-1.png",
+      "selectedIconPath": "assets/img/dy.png"
+    },
+    {
+      "pagePath": "pages/movie/movie",
+      "text": "电影推荐",
+      "iconPath": "assets/img/tj-1.png",
+      "selectedIconPath": "assets/img/tj.png"
+    },
+    {
+      "pagePath": "pages/movie/movie",
+      "text": "查询电影",
+      "iconPath": "assets/img/search-1.png",
+      "selectedIconPath": "assets/img/search.png"
+    }]
+  }
+}
