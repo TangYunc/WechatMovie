@@ -1,4 +1,4 @@
-// pages/movie/movie.js
+// pages/search/search.js
 var subjectUtil = require('../../utils/subjectUtil.js');
 Page({
 
@@ -6,24 +6,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrls: [
-      '/assets/img/001.jpg',
-      '/assets/img/002.jpg',
-      '/assets/img/003.jpg',
-    ],
-    indicatorDots: true,
-    autoplay: true,
-    interval: 3000,
-    duration: 1000,
+    inputVal: "",
     movies: [],
-    hidden: false
+    hidden: true,
+    modalHidden: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.loadMovie();
+
   },
 
   /**
@@ -67,6 +60,11 @@ Page({
   onReachBottom: function() {
 
   },
+  bindKeyInput: function (e) {
+    this.setData({
+      inputVal: e.detail.value
+    });
+  },
 
   /**
    * 用户点击右上角分享
@@ -74,11 +72,19 @@ Page({
   onShareAppMessage: function() {
 
   },
-
-  loadMovie: function() {
+  search: function() {
+    if (this.data.inputVal == "") {
+      this.setData({
+        modalHidden: false
+      })
+      return;
+    }
+    this.setData({
+      hidden: false
+    });
     var page = this;
     wx.request({
-      url: 'https://api.douban.com/v2/movie/in_theaters',
+      url: 'http://api.douban.com/v2/movie/search?q=' + page.data.inputVal,
       header: {
         'Content-Type': 'application/json'
       },
@@ -92,7 +98,12 @@ Page({
       }
     })
   },
+  hideModal: function() {
+    this.setData({
+      modalHidden: true
+    })
+  },
   detail: function(e) {
     getApp().detail(e);
-  },
+  }
 })

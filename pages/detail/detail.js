@@ -1,4 +1,4 @@
-// pages/movie/movie.js
+// pages/detail/detail.js
 var subjectUtil = require('../../utils/subjectUtil.js');
 Page({
 
@@ -6,24 +6,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrls: [
-      '/assets/img/001.jpg',
-      '/assets/img/002.jpg',
-      '/assets/img/003.jpg',
-    ],
-    indicatorDots: true,
-    autoplay: true,
-    interval: 3000,
-    duration: 1000,
-    movies: [],
-    hidden: false
+    movie: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.loadMovie();
+    this.loadMovie(options.id);
   },
 
   /**
@@ -74,25 +64,21 @@ Page({
   onShareAppMessage: function() {
 
   },
-
-  loadMovie: function() {
+  loadMovie: function(movieId) {
     var page = this;
+    // var movieId= wx.getStorageSync('movieId');
     wx.request({
-      url: 'https://api.douban.com/v2/movie/in_theaters',
+      url: 'https://api.douban.com/v2/movie/subject/' + movieId,
       header: {
         'Content-Type': 'application/json'
       },
       success: function(res) {
-        var subjects = res.data.subjects;
-        subjectUtil.processSubjects(subjects);
+        var subject = res.data;
+        subjectUtil.processSubject(subject);
         page.setData({
-          movies: subjects,
-          hidden: true
+          movie: subject
         });
       }
     })
-  },
-  detail: function(e) {
-    getApp().detail(e);
-  },
+  }
 })
